@@ -14,7 +14,7 @@ using MyCardio.ViewModel.Commands;
 
 namespace MyCardio.ViewModel
 {
-    public class SelectUserVM : ObservableObject
+    public class UsersVM : ObservableObject
     {
         private User _currentUser;
 
@@ -29,14 +29,14 @@ namespace MyCardio.ViewModel
             }
         }
 
-        public ICommand SelectUserCommand => new SingleParameterCommand<string>( SelectUser);
+        public ICommand SelectUserCommand => new SingleParameterCommand<User>(SelectUser);
 
         private readonly ObservableCollection<User> _users;
         public IEnumerable<User> Users => _users;
 
-        public SelectUserVM()
+        public UsersVM()
         {
-            _users = Serializer.Deserialize<ObservableCollection<User>>(FileName) ?? new ObservableCollection<User>{new User("Kuba"), new User("Krzyś")};
+            _users = Serializer.Deserialize<ObservableCollection<User>>(FileName) ?? new ObservableCollection<User>{new User("Kuba", @"C:\Users\filip\Pictures\John-Prideaux-headshot_picmonkeyed.jpg"), new User("Krzyś", null) };
             Application.Current.Exit += CurrentOnExit;
         }
 
@@ -45,9 +45,9 @@ namespace MyCardio.ViewModel
             Serializer.Serialize(_users, FileName);
         }
 
-        public void SelectUser(string userName)
+        public void SelectUser(User user)
         {
-            Debug.WriteLine("Selected user " + userName);
+            Debug.WriteLine(user);
         }
 
         private const string FileName = "users.bin";

@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:MyCardio"
              xmlns:properties="clr-namespace:MyCardio.Properties"
              StartupUri="View/MainWindow.xaml"
-			 Exit="App_OnExit">
+             Exit="App_OnExit">
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -22,6 +22,8 @@
 					Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
 				<ResourceDictionary
 					Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
+				<ResourceDictionary
+					Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 
 			<ObjectDataProvider x:Key="ResxResources"

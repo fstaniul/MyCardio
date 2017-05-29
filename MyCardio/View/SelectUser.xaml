@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:MyCardio.View"
+	  xmlns:properties="clr-namespace:MyCardio.Properties"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:viewModel="clr-namespace:MyCardio.ViewModel"
       mc:Ignorable="d"
@@ -17,13 +18,14 @@
       TextOptions.TextRenderingMode="Auto"
       Background="{DynamicResource MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}">
-	
+
 	<Page.DataContext>
-		<viewModel:SelectUserVM />
+		<viewModel:UsersVM />
 	</Page.DataContext>
 
 	<Grid VerticalAlignment="Center" HorizontalAlignment="Center">
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
@@ -35,17 +37,66 @@
 		        BorderThickness="0 1 0 0"
 		        BorderBrush="{StaticResource MaterialDesignDivider}" />
 
-		<ListBox ItemsSource="{Binding Path=Users}" 
-				 Style="{StaticResource MaterialDesignListBox}"
-				 x:Name="UsersListBox">
-			<ListBox.ItemTemplate>
+		<ItemsControl Grid.Row="2"
+		              ItemsSource="{Binding Path=Users}"
+		              x:Name="UsersItemsControl">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<materialDesign:Chip Content="{Binding Name}" 
-										 Icon="{Binding Name[0]}" 
-										 Command="{Binding ElementName=UsersListBox, Path=DataContext.SelectUserCommand}"
-										 CommandParameter="{Binding Name}" />
+					<materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}"
+					                        Margin="4 4 0 0"
+					                        x:Name="AccountFlipper">
+						<materialDesign:Flipper.FrontContent>
+							<Grid Width="200" Height="256">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="160" />
+									<RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<materialDesign:ColorZone Grid.Row="0"
+														  Grid.RowSpan="3"
+														  Height="100"
+														  Mode="PrimaryMid" />
+								<materialDesign:Card Grid.Row="0" UniformCornerRadius="64" Width="128" Height="128"
+													 materialDesign:ShadowAssist.ShadowDepth="Depth1"
+													 Margin="0 5 0 0">
+									<Image
+										Source="{Binding Image, TargetNullValue=properties:Images.defaultUserPic}"
+										VerticalAlignment="Center" HorizontalAlignment="Center" 
+										MinWidth="128" MinHeight="128"/>
+								</materialDesign:Card>
+								<StackPanel Grid.Row="1"
+								            Margin="2 2 2 2"
+								            Orientation="Horizontal"
+								            VerticalAlignment="Top" HorizontalAlignment="Center">
+									<TextBlock Text="{Binding Name}"
+									           Style="{StaticResource MaterialDesignTitleTextBlock}"
+									           HorizontalAlignment="Center" />
+									<Button Style="{DynamicResource MaterialDesignToolButton}"
+									        Opacity=".80"
+									        Margin="8 0 0 0"
+									        Command="{x:Static materialDesign:Flipper.FlipCommand}"
+									        HorizontalAlignment="Right">
+										<materialDesign:PackIcon Kind="Pencil" />
+									</Button>
+								</StackPanel>
+								<Button Grid.Row="2"
+								        Command="{Binding ElementName=UsersItemsControl, Path=DataContext.SelectUserCommand}"
+										CommandParameter="{Binding ElementName=AccountFlipper, Path=DataContext}"
+								        Content="{Binding Source={StaticResource ResxResources}, Path=SelectUserPageSelectUserButton}"
+								        Style="{StaticResource MaterialDesignFlatButton}" />
+							</Grid>
+						</materialDesign:Flipper.FrontContent>
+						<materialDesign:Flipper.BackContent>
+							<Grid Width="200" Height="256" />
+						</materialDesign:Flipper.BackContent>
+					</materialDesign:Flipper>
 				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</Grid>
 </Page>
