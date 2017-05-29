@@ -20,6 +20,6 @@
 		>
 	
 	<Grid>
-		<Frame x:Name="Frame" Source="{Binding }" />
+		<Frame x:Name="Frame" />
     </Grid>
 </Window>

@@ -15,7 +15,7 @@ namespace MyCardio.ViewModel
 
         public static void Create(MainWindow mainWindow)
         {
-            
+            _instance = new MainWindowVM(mainWindow);
         }
 
         private MainWindow _mainWindow;
@@ -27,14 +27,21 @@ namespace MyCardio.ViewModel
             _mainWindow = mainWindow;
             Pages = new Dictionary<Type, Page>
             {
-                
+                {typeof(SelectUser), new SelectUser()}
             };
         }
 
-        public void Navigate(Type type)
+        public static void Navigate(Type type)
         {
-            if (Pages[type] == null) throw new ArgumentException("Type of page not found!", nameof(type));
-            _mainWindow.Frame.Navigate(Pages[type]);
+            try
+            {
+                if (_instance.Pages[type] == null) throw new ArgumentException("Type of page not found!", nameof(type));
+                _instance?._mainWindow.Frame.Navigate(_instance.Pages[type]);
+            }
+            catch (KeyNotFoundException)
+            {
+                //Ignore this, just do nothing!
+            }
         }
     }
 }

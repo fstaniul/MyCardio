@@ -61,6 +61,15 @@ namespace MyCardio.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select user:.
+        /// </summary>
+        public static string SelectUserPageSelectUser {
+            get {
+                return ResourceManager.GetString("SelectUserPageSelectUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MyCardio.
         /// </summary>
         public static string Title {

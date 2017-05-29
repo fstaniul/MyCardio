@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MyCardio.ViewModel
+namespace MyCardio.ViewModel.Commands
 {
-    public class DelegateCommand : ICommand
+    public class NoParameterCommand : ICommand
     {
         private readonly Action _action;
 
-        public DelegateCommand(Action action)
+        public NoParameterCommand(Action action)
         {
             _action = action;
         }
