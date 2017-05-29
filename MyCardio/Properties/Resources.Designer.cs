@@ -61,16 +61,25 @@ namespace MyCardio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Resources/defaultUserPic.jpeg.
+        ///   Looks up a localized string similar to Change avatar.
         /// </summary>
-        public static string DefaultUserPic {
+        public static string ChoseAvatarBtnText {
             get {
-                return ResourceManager.GetString("DefaultUserPic", resourceCulture);
+                return ResourceManager.GetString("ChoseAvatarBtnText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select user:.
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string NameHint {
+            get {
+                return ResourceManager.GetString("NameHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select observableUser:.
         /// </summary>
         public static string SelectUserPageSelectUser {
             get {

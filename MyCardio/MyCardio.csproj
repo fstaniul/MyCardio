@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\Images.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -68,6 +69,7 @@
     </Compile>
     <Compile Include="ViewModel\Commands\SingleParameterCommand.cs" />
     <Compile Include="ViewModel\Commands\NoParameterCommand.cs" />
+    <Compile Include="ViewModel\ObservablePuls.cs" />
     <Compile Include="View\SelectUser.xaml.cs">
       <DependentUpon>SelectUser.xaml</DependentUpon>
     </Compile>
@@ -80,7 +82,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Puls.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="ViewModel\ObservableUser.cs" />
     <Compile Include="Utils\Serializer.cs" />
     <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="ViewModel\UsersVM.cs" />

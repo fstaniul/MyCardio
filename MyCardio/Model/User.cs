@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace MyCardio.Model
 {
@@ -13,8 +12,11 @@ namespace MyCardio.Model
         private static int _counter;
 
         public int Id { get; }
+
         public string Name { get; set; }
+
         public List<Puls> Pulses { get; }
+
         public string Image { get; set; }
 
         public User()

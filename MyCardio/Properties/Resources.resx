@@ -117,11 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DefaultUserPic" xml:space="preserve">
-    <value>/Resources/defaultUserPic.jpeg</value>
+  <data name="ChoseAvatarBtnText" xml:space="preserve">
+    <value>Change avatar</value>
+  </data>
+  <data name="NameHint" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="SelectUserPageSelectUser" xml:space="preserve">
-    <value>Select user:</value>
+    <value>Select observableUser:</value>
   </data>
   <data name="SelectUserPageSelectUserButton" xml:space="preserve">
     <value>SELECT</value>

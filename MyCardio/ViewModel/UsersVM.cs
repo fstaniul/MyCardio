@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using MaterialDesignThemes.Wpf.Transitions;
+using Microsoft.Win32;
 using MyCardio.Model;
 using MyCardio.Utils;
 using MyCardio.ViewModel.Commands;
@@ -16,27 +17,34 @@ namespace MyCardio.ViewModel
 {
     public class UsersVM : ObservableObject
     {
-        private User _currentUser;
+        private ObservableUser _currentObservableUser;
 
-        public User CurrentUser
+        public ObservableUser CurrentObservableUser
         {
-            get => _currentUser;
+            get => _currentObservableUser;
             set
             {
-                if (_currentUser == value) return;
-                _currentUser = value;
-                RaisePropertyChangedEvent(nameof(CurrentUser));
+                if (_currentObservableUser == value) return;
+                _currentObservableUser = value;
+                RaisePropertyChangedEvent(nameof(CurrentObservableUser));
             }
         }
 
-        public ICommand SelectUserCommand => new SingleParameterCommand<User>(SelectUser);
+        public ICommand SelectUserCommand => new SingleParameterCommand<ObservableUser>(SelectUser);
+        public ICommand SelectUserAvatarCommand => new SingleParameterCommand<ObservableUser>(SelectUserAvatar);
 
-        private readonly ObservableCollection<User> _users;
-        public IEnumerable<User> Users => _users;
+        private readonly List<User> _users;
+        private readonly CustomObservableCollection<ObservableUser, User> _observableUsers;
+        public IEnumerable<ObservableUser> ObservableUsers => _observableUsers;
 
         public UsersVM()
         {
-            _users = Serializer.Deserialize<ObservableCollection<User>>(FileName) ?? new ObservableCollection<User>{new User("Kuba", @"C:\Users\filip\Pictures\John-Prideaux-headshot_picmonkeyed.jpg"), new User("Krzyś", null) };
+            _users = Serializer.Deserialize<List<User>>(FileName) ?? new List<User>
+            {
+                new User("Krzys", @"C:\Users\filip\Pictures\John-Prideaux-headshot_picmonkeyed.jpg"),
+                new User("SuperKrzys", null)
+            };
+            _observableUsers = new CustomObservableCollection<ObservableUser, User>(_users, u => new ObservableUser(u));
             Application.Current.Exit += CurrentOnExit;
         }
 
@@ -45,9 +53,21 @@ namespace MyCardio.ViewModel
             Serializer.Serialize(_users, FileName);
         }
 
-        public void SelectUser(User user)
+        public void SelectUser(ObservableUser observableUser)
         {
-            Debug.WriteLine(user);
+            Debug.WriteLine(observableUser);
+        }
+
+        public void SelectUserAvatar(ObservableUser observableUser)
+        {
+            var fileDialog = new OpenFileDialog();
+            var result = fileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                var file = fileDialog.FileName;
+                observableUser.Image = file;
+            }
         }
 
         private const string FileName = "users.bin";
