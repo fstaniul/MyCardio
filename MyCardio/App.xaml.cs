@@ -8,10 +8,18 @@ using System.Windows;
 
 namespace MyCardio
 {
+    public delegate void DoAtExit();
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
+        public event DoAtExit ExitEvent;
+
+        private void App_OnExit(object sender, ExitEventArgs e)
+        {
+            ExitEvent?.Invoke();
+        }
     }
 }

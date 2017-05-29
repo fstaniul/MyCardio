@@ -2,8 +2,31 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MyCardio"
-             StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         
-    </Application.Resources>
+             xmlns:properties="clr-namespace:MyCardio.Properties"
+             StartupUri="View/MainWindow.xaml"
+			 Exit="App_OnExit">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary
+					Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+				<ResourceDictionary
+					Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+				<ResourceDictionary
+					Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Red.xaml" />
+				<ResourceDictionary
+					Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Amber.xaml" />
+				<ResourceDictionary
+					Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
+				<ResourceDictionary
+					Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+				<ResourceDictionary
+					Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+
+			<ObjectDataProvider x:Key="ResxResources"
+			                    ObjectType="{x:Type properties:ResourceProvider}"
+			                    MethodName="GetResources" />
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>
