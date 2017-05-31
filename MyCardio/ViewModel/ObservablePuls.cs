@@ -3,33 +3,43 @@ using MyCardio.ViewModel;
 
 namespace MyCardio.Model
 {
-    public class ObservablePuls : ObservableObject
+    public class ObservablePuls : ObservableObject, ISourceContainer<Puls>
     {
-        private Puls _puls;
+        public Puls Source { get; }
 
         public int Systole
         {
-            get => _puls.Systole;
+            get => Source.Systole;
             set
             {
-                _puls.Systole = value;
+                Source.Systole = value;
                 RaisePropertyChangedEvent(nameof(Systole));
             } 
         }
 
         public int Diastole
         {
-            get => _puls.Diastole;
+            get => Source.Diastole;
             set
             {
-                _puls.Diastole = value;
+                Source.Diastole = value;
                 RaisePropertyChangedEvent(nameof(Diastole));
             } 
         }
 
+        public DateTime DateTime
+        {
+            get => Source.DateTime;
+            set
+            {
+                Source.DateTime = value;
+                RaisePropertyChangedEvent(nameof(DateTime));
+            }
+        }
+
         public ObservablePuls(Puls puls)
         {
-            _puls = puls ?? throw new ArgumentNullException(nameof(puls));
+            Source = puls ?? throw new ArgumentNullException(nameof(puls));
         }
     }
 }

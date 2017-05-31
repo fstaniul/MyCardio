@@ -26,6 +26,8 @@ namespace MyCardio.ViewModel.Commands
             _action((T) parameter);
         }
 
+#pragma warning disable 67
         public event EventHandler CanExecuteChanged;
+#pragma warning restore 67
     }
 }

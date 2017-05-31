@@ -17,14 +17,14 @@ using MyCardio.ViewModel;
 namespace MyCardio.View
 {
     /// <summary>
-    /// Interaction logic for SelectUser.xaml
+    /// Interaction logic for CreateUser.xaml
     /// </summary>
-    public partial class SelectUser : Page
+    public partial class CreateUser : Page
     {
-        public SelectUser()
+        public CreateUser()
         {
             InitializeComponent();
-            DataContext = UsersVM.Instance;
+            DataContext = CreateUserVM.Instance;
         }
     }
 }

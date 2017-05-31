@@ -67,12 +67,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Images.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.pl-PL.Designer.cs">
+      <DependentUpon>Resources.pl-PL.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Utils\ImagePicker.cs" />
+    <Compile Include="Validations\ValidationRuleInteger.cs" />
+    <Compile Include="Validations\ValidationRuleName.cs" />
     <Compile Include="ViewModel\Commands\SingleParameterCommand.cs" />
     <Compile Include="ViewModel\Commands\NoParameterCommand.cs" />
+    <Compile Include="ViewModel\CreateUserVM.cs" />
+    <Compile Include="Model\Language.cs" />
     <Compile Include="ViewModel\ObservablePuls.cs" />
+    <Compile Include="ViewModel\PulsesOverviewVM.cs" />
+    <Compile Include="View\CreateUser.xaml.cs">
+      <DependentUpon>CreateUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PulsesOverview.xaml.cs">
+      <DependentUpon>PulsesOverview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SelectUser.xaml.cs">
       <DependentUpon>SelectUser.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\CreateUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,6 +112,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PulsesOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SelectUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,8 +137,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Images.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Images.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pl-PL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.pl-PL.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -129,7 +158,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\defaultUserPic.jpeg" />
+    <None Include="Resources\Flag_of_United_Kingdom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pl.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

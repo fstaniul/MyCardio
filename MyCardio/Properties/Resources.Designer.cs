@@ -61,11 +61,101 @@ namespace MyCardio.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACCEPT.
+        /// </summary>
+        public static string Accept {
+            get {
+                return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CANCEL.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change avatar.
         /// </summary>
         public static string ChoseAvatarBtnText {
             get {
                 return ResourceManager.GetString("ChoseAvatarBtnText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create User:.
+        /// </summary>
+        public static string CreateUser {
+            get {
+                return ResourceManager.GetString("CreateUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date:.
+        /// </summary>
+        public static string DataTimeGrid {
+            get {
+                return ResourceManager.GetString("DataTimeGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pressure measurement date..
+        /// </summary>
+        public static string DateHint {
+            get {
+                return ResourceManager.GetString("DateHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date:.
+        /// </summary>
+        public static string DateLabel {
+            get {
+                return ResourceManager.GetString("DateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diastole.
+        /// </summary>
+        public static string DiastoleHint {
+            get {
+                return ResourceManager.GetString("DiastoleHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must specify name!.
+        /// </summary>
+        public static string EmptyNameTextBox {
+            get {
+                return ResourceManager.GetString("EmptyNameTextBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only use letters!.
+        /// </summary>
+        public static string InvalidNameErrorTip {
+            get {
+                return ResourceManager.GetString("InvalidNameErrorTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can use only numbers!.
+        /// </summary>
+        public static string InvalidNumberTip {
+            get {
+                return ResourceManager.GetString("InvalidNumberTip", resourceCulture);
             }
         }
         
@@ -79,7 +169,34 @@ namespace MyCardio.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select observableUser:.
+        ///   Looks up a localized string similar to Pressure:.
+        /// </summary>
+        public static string PressureLabel {
+            get {
+                return ResourceManager.GetString("PressureLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pressure:.
+        /// </summary>
+        public static string PulsGrid {
+            get {
+                return ResourceManager.GetString("PulsGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SAVE.
+        /// </summary>
+        public static string SaveButtonTxt {
+            get {
+                return ResourceManager.GetString("SaveButtonTxt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select User:.
         /// </summary>
         public static string SelectUserPageSelectUser {
             get {
@@ -93,6 +210,15 @@ namespace MyCardio.Properties {
         public static string SelectUserPageSelectUserButton {
             get {
                 return ResourceManager.GetString("SelectUserPageSelectUserButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Systole.
+        /// </summary>
+        public static string SystoleHint {
+            get {
+                return ResourceManager.GetString("SystoleHint", resourceCulture);
             }
         }
         

@@ -7,6 +7,8 @@
       xmlns:properties="clr-namespace:MyCardio.Properties"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:viewModel="clr-namespace:MyCardio.ViewModel"
+      xmlns:validations="clr-namespace:MyCardio.Validations"
+      xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
       mc:Ignorable="d"
       d:DesignHeight="300" d:DesignWidth="300"
       Title="SelectUser"
@@ -19,137 +21,170 @@
       Background="{DynamicResource MaterialDesignPaper}"
       FontFamily="{DynamicResource MaterialDesignFont}">
 
-	<Page.DataContext>
-		<viewModel:UsersVM />
-	</Page.DataContext>
-
-	<Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<TextBlock Grid.Row="0" Grid.Column="0"
-		           Text="{Binding Path=SelectUserPageSelectUser, Source={StaticResource ResxResources}}"
-		           Style="{StaticResource MaterialDesignHeadlineTextBlock}" />
+		<Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0" Grid.Column="0"
+			           Text="{Binding Path=SelectUserPageSelectUser, Source={StaticResource ResxResources}}"
+			           Style="{StaticResource MaterialDesignHeadlineTextBlock}" />
 
-		<Border Grid.Row="1" Grid.Column="0"
-		        BorderThickness="0 1 0 0"
-		        BorderBrush="{StaticResource MaterialDesignDivider}" />
+			<Border Grid.Row="1" Grid.Column="0"
+			        BorderThickness="0 1 0 0"
+			        BorderBrush="{StaticResource MaterialDesignDivider}" />
 
-		<ItemsControl Grid.Row="2"
-		              ItemsSource="{Binding Path=ObservableUsers}"
-		              x:Name="UsersItemsControl">
-			<ItemsControl.ItemsPanel>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Horizontal" />
-				</ItemsPanelTemplate>
-			</ItemsControl.ItemsPanel>
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}"
-					                        Margin="4 4 0 0"
-					                        x:Name="AccountFlipper">
-						<materialDesign:Flipper.FrontContent>
-							<Grid Width="200" Height="256">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="160" />
-									<RowDefinition Height="*" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
-								<materialDesign:ColorZone Grid.Row="0"
-								                          Grid.RowSpan="3"
-								                          Height="100"
-								                          Mode="PrimaryDark" />
-								<materialDesign:Card Grid.Row="0" UniformCornerRadius="64" Width="128" Height="128"
-								                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
-								                     Margin="0 5 0 0">
-									<Image
-										Source="{Binding Image, TargetNullValue=properties:Images.defaultUserPic}"
-										VerticalAlignment="Center" HorizontalAlignment="Center"
-										MinWidth="128" MinHeight="128" />
-								</materialDesign:Card>
-								<StackPanel Grid.Row="1"
-								            Margin="2 2 2 2"
-								            Orientation="Horizontal"
-								            VerticalAlignment="Top" HorizontalAlignment="Center">
-									<TextBlock Text="{Binding Name}"
-									           Style="{StaticResource MaterialDesignTitleTextBlock}"
-									           HorizontalAlignment="Center"
-									           VerticalAlignment="Center" />
-									<Button Style="{DynamicResource MaterialDesignToolButton}"
-									        Opacity=".80"
-									        Margin="8 0 0 0"
-									        Command="{x:Static materialDesign:Flipper.FlipCommand}"
-									        HorizontalAlignment="Right"
-									        VerticalAlignment="Center">
-										<materialDesign:PackIcon Kind="Pencil" />
-									</Button>
-								</StackPanel>
-								<Button Grid.Row="2"
-								        Command="{Binding ElementName=UsersItemsControl, Path=DataContext.SelectUserCommand}"
-								        CommandParameter="{Binding ElementName=AccountFlipper, Path=DataContext}"
-								        Content="{Binding Source={StaticResource ResxResources}, Path=SelectUserPageSelectUserButton}"
-								        Style="{StaticResource MaterialDesignFlatButton}" />
-							</Grid>
-						</materialDesign:Flipper.FrontContent>
-						<materialDesign:Flipper.BackContent>
-							<Grid Width="200" Height="256">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition />
-									<ColumnDefinition />
-								</Grid.ColumnDefinitions>
-								<Grid.RowDefinitions>
-									<RowDefinition Height="160" />
-									<RowDefinition Height="*" />
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="Auto" />
-								</Grid.RowDefinitions>
-								<materialDesign:ColorZone Grid.Row="0"
-								                          Grid.RowSpan="3"
-								                          Grid.ColumnSpan="2"
-								                          Height="100"
-								                          Mode="PrimaryDark" />
-								<materialDesign:Card Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-								                     UniformCornerRadius="64" Width="128" Height="128"
-								                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
-								                     Margin="0 5 0 0">
-									<Button Command="{Binding ElementName=UsersItemsControl, Path=DataContext.SelectUserAvatarCommand}"
+			<ItemsControl Grid.Row="2" Grid.RowSpan="2"
+			              ItemsSource="{Binding Path=ObservableUsers}"
+			              x:Name="UsersItemsControl">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Horizontal" />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}"
+						                        Margin="4 4 0 0"
+						                        x:Name="AccountFlipper">
+							<materialDesign:Flipper.FrontContent>
+								<Grid Width="200" Height="256">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="160" />
+										<RowDefinition Height="*" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<materialDesign:ColorZone Grid.Row="0"
+									                          Grid.RowSpan="3"
+									                          Height="100"
+									                          Mode="PrimaryDark" />
+									<materialDesign:Card Grid.Row="0"
+									                     HorizontalAlignment="Right"
+									                     VerticalAlignment="Top"
+									                     Width="30" Height="30"
+									                     UniformCornerRadius="10"
+									                     Margin="4 4 4 4"
+									                     materialDesign:ShadowAssist.ShadowDepth="Depth0">
+										<Button Style="{StaticResource MaterialDesignToolButton}"
+										        Foreground="LightSteelBlue"
+										        Command="{Binding ElementName=UsersItemsControl, Path=DataContext.DeleteUserCommand}"
+										        CommandParameter="{Binding ElementName=AccountFlipper, Path=DataContext}"
+										        VerticalAlignment="Center" HorizontalAlignment="Center"
+										        Width="30" Height="30">
+											<materialDesign:PackIcon Kind="DeleteForever" />
+										</Button>
+									</materialDesign:Card>
+									<materialDesign:Card Grid.Row="0" Style="{StaticResource Avatar}"
+									                     Margin="0 5 0 0">
+										<Image Source="{Binding Image}"
+										       Style="{StaticResource AvatarImage}" />
+									</materialDesign:Card>
+									<StackPanel Grid.Row="1"
+									            Margin="2 2 2 2"
+									            Orientation="Horizontal"
+									            VerticalAlignment="Top" HorizontalAlignment="Center">
+										<TextBlock Text="{Binding Name}"
+										           Style="{StaticResource MaterialDesignSubheadingTextBlock}"
+										           HorizontalAlignment="Center"
+										           VerticalAlignment="Center" />
+										<Button Style="{DynamicResource MaterialDesignToolButton}"
+										        Opacity=".80"
+										        Margin="8 0 0 0"
+										        Command="{x:Static materialDesign:Flipper.FlipCommand}"
+										        HorizontalAlignment="Right"
+										        VerticalAlignment="Center">
+											<materialDesign:PackIcon Kind="Pencil" />
+										</Button>
+									</StackPanel>
+									<Button Grid.Row="2"
+									        Command="{Binding ElementName=UsersItemsControl, Path=DataContext.SelectUserCommand}"
 									        CommandParameter="{Binding ElementName=AccountFlipper, Path=DataContext}"
-											Style="{StaticResource MaterialDesignFlatButton}"
-											Width="128" Height="128">
-										<Image
-											Source="{Binding Image, TargetNullValue=properties:Images.defaultUserPic}"
-											VerticalAlignment="Center" HorizontalAlignment="Center"
-											Width="128" Height="128" />
+									        Content="{Binding Source={StaticResource ResxResources}, Path=SelectUserPageSelectUserButton}"
+									        Style="{StaticResource MaterialDesignFlatButton}" />
+								</Grid>
+							</materialDesign:Flipper.FrontContent>
+							<materialDesign:Flipper.BackContent>
+								<Grid Width="200" Height="256">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition />
+										<ColumnDefinition />
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="160" />
+										<RowDefinition Height="*" />
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<materialDesign:ColorZone Grid.Row="0"
+									                          Grid.RowSpan="3"
+									                          Grid.ColumnSpan="2"
+									                          Height="100"
+									                          Mode="PrimaryDark" />
+									<materialDesign:Card Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+									                     Style="{StaticResource Avatar}"
+									                     Margin="0 5 0 0">
+										<Button Command="{Binding ElementName=UsersItemsControl, Path=DataContext.SelectUserAvatarCommand}"
+										        CommandParameter="{Binding ElementName=AccountFlipper, Path=DataContext}"
+										        Style="{StaticResource AvatarButton}">
+											<Image
+												Source="{Binding Image, TargetNullValue=properties:Images.defaultUserPic}"
+												Style="{StaticResource AvatarImage}" />
+										</Button>
+									</materialDesign:Card>
+									<StackPanel Orientation="Horizontal"
+									            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+									            HorizontalAlignment="Center">
+										<materialDesign:PackIcon Kind="AccountCardDetails"
+										                         VerticalAlignment="Center"
+										                         Margin="5 0 0 0"
+										                         Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
+										<TextBox Margin="8 0 0 0"
+										         materialDesign:HintAssist.Hint="{Binding Path=NameHint, Source={StaticResource ResxResources}}"
+										         x:Name="NameTextBox"
+										         VerticalAlignment="Center"
+										         Width="150">
+											<TextBox.Text>
+												<Binding Path="Name"
+														 Mode="TwoWay"
+														 UpdateSourceTrigger="PropertyChanged"
+														 NotifyOnValidationError="True"
+														 ValidatesOnDataErrors="True"
+														 ValidatesOnNotifyDataErrors="True" >
+													<Binding.ValidationRules>
+														<validations:ValidationRuleName ValidatesOnTargetUpdated="True" />
+													</Binding.ValidationRules>
+												</Binding>
+											</TextBox.Text>
+											</TextBox>
+									</StackPanel>
+									<Button Grid.Row="3" Grid.Column="1"
+									        HorizontalAlignment="Right"
+									        Margin="0 0 5 5"
+									        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+									        Command="{x:Static materialDesign:Flipper.FlipCommand}">
+										<materialDesign:PackIcon Kind="Check" />
 									</Button>
-								</materialDesign:Card>
-								<StackPanel Orientation="Horizontal"
-								            Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-								            HorizontalAlignment="Center">
-									<materialDesign:PackIcon Kind="AccountCardDetails"
-									                         VerticalAlignment="Center"
-									                         Margin="5 0 0 0"
-									                         Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
-									<TextBox Margin="8 0 0 0"
-									         Text="{Binding Path=Name, Mode=TwoWay}"
-									         materialDesign:HintAssist.Hint="{Binding Path=NameHint, Source={StaticResource ResxResources}}"
-									         x:Name="NameTextBox"
-									         VerticalAlignment="Center"
-									         Width="150" />
-								</StackPanel>
-								<Button Grid.Row="3" Grid.Column="1"
-								        HorizontalAlignment="Right"
-								        Margin="0 0 5 5"
-								        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-								        Command="{x:Static materialDesign:Flipper.FlipCommand}">
-									<materialDesign:PackIcon Kind="Check" />
-								</Button>
-							</Grid>
-						</materialDesign:Flipper.BackContent>
-					</materialDesign:Flipper>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+								</Grid>
+							</materialDesign:Flipper.BackContent>
+						</materialDesign:Flipper>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Grid>
+		<Button Grid.Row="1"
+		        HorizontalAlignment="Right"
+		        VerticalAlignment="Bottom"
+		        Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+		        Command="{Binding CreateUserCommand}"
+		        Margin="20 20 20 20">
+			<materialDesign:PackIcon Kind="Plus" />
+		</Button>
 	</Grid>
 </Page>

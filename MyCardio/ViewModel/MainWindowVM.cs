@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Navigation;
+using MaterialDesignThemes.Wpf;
+using MyCardio.Model;
+using MyCardio.Properties;
 using MyCardio.View;
+using MyCardio.ViewModel.Commands;
 
 namespace MyCardio.ViewModel
 {
@@ -18,16 +27,30 @@ namespace MyCardio.ViewModel
             _instance = new MainWindowVM(mainWindow);
         }
 
-        private MainWindow _mainWindow;
+        private readonly MainWindow _mainWindow;
 
         private Dictionary<Type, Page> Pages { get; }
+
+        private readonly ObservableCollection<Language> _languages;
+
+        public IEnumerable<Language> Languages => _languages;
+
+        public ICommand SelectLanguage => new SingleParameterCommand<Language>(_selectLanguage);
 
         private MainWindowVM(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
             Pages = new Dictionary<Type, Page>
             {
-                {typeof(SelectUser), new SelectUser()}
+                {typeof(SelectUser), new SelectUser()},
+                {typeof(CreateUser), new CreateUser()},
+                {typeof(PulsesOverview), new PulsesOverview()}
+            };
+
+            _languages = new ObservableCollection<Language>
+            {
+                {new Language("en-EN", Images.EnglishFlag) },
+                {new Language("pl-PL", Images.PolishFlag) }
             };
         }
 
@@ -42,6 +65,11 @@ namespace MyCardio.ViewModel
             {
                 //Ignore this, just do nothing!
             }
+        }
+
+        private void _selectLanguage(Language language)
+        {
+            ResourceProvider.ChangeCulture(new CultureInfo(language.Culture));
         }
     }
 }

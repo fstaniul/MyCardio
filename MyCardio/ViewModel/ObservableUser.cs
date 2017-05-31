@@ -3,31 +3,32 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Windows.Markup;
 using MaterialDesignThemes.Wpf.Transitions;
 using MyCardio.ViewModel;
 
 namespace MyCardio.Model
 {
-    public class ObservableUser : ObservableObject
+    public class ObservableUser : ObservableObject, ISourceContainer<User>
     {
-        private User _source;
+        public User Source { get; }
 
         public string Name
         {
-            get => _source.Name;
+            get => Source.Name;
             set
             {
-                _source.Name = value;
+                Source.Name = value;
                 RaisePropertyChangedEvent(nameof(Name));
             }
         }
 
         public string Image
         {
-            get => _source.Image;
+            get => Source.Image;
             set
             {
-                _source.Image = value;
+                Source.Image = value;
                 RaisePropertyChangedEvent(nameof(Image));
             }
         }
@@ -39,12 +40,17 @@ namespace MyCardio.Model
 
         public ObservableUser(User source)
         {
-            this._source = source ?? throw new ArgumentNullException(nameof(source));
+            this.Source = source ?? throw new ArgumentNullException(nameof(source));
             Pulses = new CustomObservableCollection<ObservablePuls, Puls>(source.Pulses, p => new ObservablePuls(p));
         }
     }
 
-    public class CustomObservableCollection<T, S> : ObservableCollection<T>
+    public interface ISourceContainer <S>
+    {
+        S Source { get; }
+    }
+
+    public class CustomObservableCollection<T, S> : ObservableCollection<T> where T : ISourceContainer<S>
     {
         private readonly List<S> _source;
         private readonly Func<S, T> _sourceMapper;
@@ -63,6 +69,12 @@ namespace MyCardio.Model
         {
             _source.Add(obj);
             base.Add(_sourceMapper.Invoke(obj));
+        }
+
+        public new void Remove(T obj)
+        {
+            _source.Remove(obj.Source);
+            base.Remove(obj);
         }
     }
 }

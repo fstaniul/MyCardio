@@ -20,6 +20,28 @@
 		>
 	
 	<Grid>
-		<Frame x:Name="Frame" />
+		<Frame Grid.Row="0" Grid.Column="0" x:Name="Frame" NavigationUIVisibility="Hidden" />
+<!--		<md:PopupBox VerticalAlignment="Top" HorizontalAlignment="Right"-->
+<!--					 PlacementMode="LeftAndAlignMiddles"-->
+<!--					 Margin="0 10 10 0" -->
+<!--					 UnfurlOrientation="Horizontal"-->
+<!--					 md:HintAssist.Hint="{Binding Path=ChangeLanguage, Source={StaticResource ResxResources}}">-->
+<!--			<ItemsControl ItemsSource="{Binding Path=Languages}" Name="LanguagesItemControl">-->
+<!--				<ItemsControl.ItemsPanel>-->
+<!--					<ItemsPanelTemplate>-->
+<!--						<StackPanel Orientation="Horizontal" />-->
+<!--					</ItemsPanelTemplate>-->
+<!--				</ItemsControl.ItemsPanel>-->
+<!--				<ItemsControl.ItemTemplate>-->
+<!--					<DataTemplate>-->
+<!--						<Button Style="{StaticResource MaterialDesignToolButton}"-->
+<!--								Command="{Binding DataContext.SelectLanguage, ElementName=LanguagesItemControl}"-->
+<!--								CommandParameter="{Binding}">-->
+<!--							<Image Source="{Binding Icon}" Width="16" Height="16" />-->
+<!--						</Button>-->
+<!--					</DataTemplate>-->
+<!--				</ItemsControl.ItemTemplate>-->
+<!--			</ItemsControl>-->
+<!--		</md:PopupBox>-->
     </Grid>
 </Window>
